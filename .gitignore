@@ -1,0 +1,19 @@
+# Terraform-related files
+.terraform/
+
+# Ansible setup directory
+
+
+# AWS CLI installation file
+awscliv2.zip
+
+# Docker application directory
+docker-app/venv
+# Terraform setup directory
+terraform-aws-setup/
+
+# Private key file (important for security)
+
+
+# Ignore compiled files and sensitive files
+*.zip

@@ -1,0 +1,24 @@
+---
+- name: Configure Web Server
+  hosts: web
+  become: yes
+
+  tasks:
+    - name: Ensure full curl is installed on Amazon Linux
+      dnf:
+        name: curl
+        state: present
+        allowerasing: yes
+      when: ansible_os_family == "RedHat"
+
+    - name: Install Docker on Amazon Linux
+      dnf:
+        name: docker
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Enable and start Docker service
+      service:
+        name: docker
+        enabled: yes
+        state: started

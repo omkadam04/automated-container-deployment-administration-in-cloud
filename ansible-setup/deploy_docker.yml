@@ -1,0 +1,26 @@
+---
+- name: Deploy Docker container on EC2
+  hosts: web
+  become: yes
+
+  tasks:
+    - name: Install Docker (if not already installed)
+      yum:
+        name: docker
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Pull the Docker image from Docker Hub
+      command: docker pull omkadam04/docker-app
+
+    - name: Run the Docker container
+      command: docker run -d -p 80:5000 --name webapp omkadam04/docker-app
+
+    - name: Ensure Docker container is running
+      command: docker ps

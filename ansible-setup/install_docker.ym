@@ -1,0 +1,35 @@
+---
+- name: Configure Web Server
+  hosts: web
+  become: yes
+
+  tasks:
+    - name: Install required system packages (Ubuntu)
+      apt:
+        name: ["apt-transport-https", "ca-certificates", "curl", "software-properties-common"]
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Install required system packages (Amazon Linux / CentOS)
+      yum:
+        name: ["curl", "ca-certificates"]
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Install Docker on Ubuntu
+      apt:
+        name: docker.io
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Install Docker on Amazon Linux / CentOS
+      yum:
+        name: docker
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Enable and start Docker service
+      service:
+        name: docker
+        enabled: yes
+        state: started
