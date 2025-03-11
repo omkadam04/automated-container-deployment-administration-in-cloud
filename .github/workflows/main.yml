@@ -13,7 +13,8 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build Docker image
-        run: docker build -t app .
+        run: docker build -f C:\Users\LENOVO\terraform-aws-setup\docker-app -t app .
+        displayName: 'Build Docker Image'
 
   test:
     runs-on: ubuntu-latest
