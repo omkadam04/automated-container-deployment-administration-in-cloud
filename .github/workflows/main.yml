@@ -14,7 +14,7 @@ jobs:
 
       - name: Build Docker image
         run: docker build -f C:\Users\LENOVO\terraform-aws-setup\docker-app -t app .
-        displayName: 'Build Docker Image'
+        
 
   test:
     runs-on: ubuntu-latest
